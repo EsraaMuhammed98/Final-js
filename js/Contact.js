@@ -1,7 +1,8 @@
 
 let contactData = document.getElementById('contactData')
 function contact() { 
-    foodCard.innerHTML=''
+  close()
+  foodCard.innerHTML=''
     searchContent.innerHTML=''
 
     contactData.innerHTML=`
