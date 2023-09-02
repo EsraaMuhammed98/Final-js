@@ -1,12 +1,12 @@
 
-let contactData = document.getElementById('contactData')
+let contactData = document.getElementById('foodCard')
 function contact() { 
-  close()
   foodCard.innerHTML=''
     searchContent.innerHTML=''
-
     contactData.innerHTML=`
+    <div class="container w-75 m-auto">
        <form oninput="checkAllInputs()" class="d-flex align-items-center">
+       <div class="row g-4" id="contactData">
 
    <div class="col-md-6">
    <input type="text" class="form-control" id="userN" oninput="validationForName() "  name="userName" placeholder="Enter Your Name">
@@ -37,7 +37,9 @@ function contact() {
   <p class='alert alert-danger d-none' id='rePassAlert'>Posswords does not match</p>
  </div> 
  <button id="btn" class="btn btn-outline-danger w-auto mx-auto" disabled>submit</button>
-  
+ </form>
+ </div>
+ </div>
     `
   
    }

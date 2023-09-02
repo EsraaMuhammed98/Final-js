@@ -77,9 +77,6 @@ displayFoodAboutA_I(http.meals)
 
 async function start(){
   let values =await getsearchByName(' ')
-  $('.card').on('click',()=>{
-    $('.menu').addClass('d-none')
-  })
 }
 start()
 // ==================================
@@ -245,7 +242,7 @@ close()
 
 
 function displayFoodAboutA_I(dataMeal){
-  
+  contactData.innerHTML=''
 let boxMeal=``
 if(dataMeal !== null)
 for(let i =0 ; i<dataMeal.length ; i++){
@@ -270,6 +267,7 @@ foodCard.innerHTML=boxMeal
 
 async function getFoodArea(country){
 foodCard.innerHTML=''
+contactData.innerHTML=''
 let httpReq= await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`)
 let response= await httpReq.json()
 // console.log(response.meals)
@@ -284,6 +282,7 @@ close()
 
 async function getIngredients() {
   foodCard.innerHTML=''
+  // contactData.innerHTML=''
   let http = await fetch(`https:www.themealdb.com/api/json/v1/1/list.php?i=list  `)
   let res = await http.json()  
   displayIngredients(res.meals.slice(0,20))
