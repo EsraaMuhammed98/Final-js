@@ -28,7 +28,7 @@ body{
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    height:100vh;
+    min-height:100vh;
     padding-block: 50px;
 }
 
@@ -42,8 +42,12 @@ body{
 }
 
 #leftMenu .menu{
-    width: 250px;
+    overflow: hidden;
+    width: 0px;
     height:100vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
     background-color: #000;
     transition:0.5s;
 

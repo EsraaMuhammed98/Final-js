@@ -1,9 +1,10 @@
 
+let contactData = document.getElementById('contactData')
 function contact() { 
-    let contact = document.getElementById('contactData')
     foodCard.innerHTML=''
     searchContent.innerHTML=''
-    contact.innerHTML=`
+
+    contactData.innerHTML=`
        <form oninput="checkAllInputs()" class="d-flex align-items-center">
 
    <div class="col-md-6">

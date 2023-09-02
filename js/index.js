@@ -1,30 +1,40 @@
 ///<reference types='../@types/jquery'/>
 let foodCard=document.getElementById('foodCard')
 let loader = document.getElementById('loading')
- 
+
 window.addEventListener('load',()=>{
   loader.classList.add('d-none')
   loader.addEventListener('transitionend',()=>{
-      loader.classList.remove('d-none')
+    loader.classList.remove('d-none')
   })
 })
 
 $('#bars').on('click' , function(){
-    $('.menu').removeClass('d-none')
+    $('.menu').css({width:'250px'} , 200)
     $('#close').removeClass('d-none')
     $('#bars').addClass('d-none')
 })
-
-$('.menu a').on('click',()=>{
-  $('.menu').addClass('d-none')
+function closeNav() {
+  $('.menu').css({width:'0px'} , 200)
   $('#close').addClass('d-none')
   $('#bars').removeClass('d-none')
+  }
+function close() {
+  $('.card').on('click',()=>{
+    if($('#bars').hasClass('d-none')){
+      closeNav()   
+  }
+})
+    
+  }
+$('.menu a').on('click',()=>{
+  // $('.menu').addClass('d-none')
+  closeNav()
 })
 
 $('#close').on('click' , function(){
-    $('.menu').addClass('d-none')
-    $('#close').addClass('d-none')
-    $('#bars').removeClass('d-none')
+    // $('.menu').addClass('d-none')
+  closeNav()
 })
 
 // ==================================
@@ -43,7 +53,7 @@ searchContent.innerHTML=`
  </div>
   `
   }
-  
+
   function searchByName(){ 
 let searchN=  document.getElementById('searchN')
 let searchL=  document.getElementById('searchL')
@@ -55,6 +65,7 @@ async function getsearchByName(sVal){
 let http = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${sVal}`)
 http =await http.json()
 displayFoodAboutA_I(http.meals)
+close()
 return http.meals
 }
 
@@ -66,12 +77,15 @@ displayFoodAboutA_I(http.meals)
 
 async function start(){
   let values =await getsearchByName(' ')
-
+  $('.card').on('click',()=>{
+    $('.menu').addClass('d-none')
+  })
 }
 start()
 // ==================================
 // Cateegory        
         function displayFood(data){
+          contactData.innerHTML=''
         searchContent.innerHTML=''
           let box=''
           for(let i =0 ; i<data.length ; i++){
@@ -93,15 +107,17 @@ start()
           foodCard.innerHTML=box
         }
         
-    
-async function getFoodByCategories(){
+            async function getFoodByCategories(){
     let httpReq= await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
     let res= await httpReq.json()
 displayFood(res.categories)
+close()
+
 }
 
 function displayCatMeals(dataMeal){
 searchContent.innerHTML=''
+contactData.innerHTML=''
 let boxMeal=''
 for(let i =0 ; i<dataMeal.length ; i++){
   boxMeal+=`
@@ -125,6 +141,8 @@ async function getCategoryMeal(meal){
     let httpReq= await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${meal}`)
     let res= await httpReq.json()
     displayCatMeals(res.meals)
+    close()
+
  
 }
 
@@ -135,10 +153,14 @@ async function getDetails (id){
   let httpReq= await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
   let res= await httpReq.json()
   displayDetails(res.meals[0])
+  close()
+
 }
 
 function displayDetails(data) {
   searchContent.innerHTML=''
+contactData.innerHTML=''
+
   let recipes = ``
   for (let i = 1; i <= 20; i++) {
       if (data[`strIngredient${i}`]) {
@@ -192,6 +214,7 @@ function displayDetails(data) {
  
 function displayAreaFunc(data){
 searchContent.innerHTML=''
+contactData.innerHTML=''
 let box=''
 for(let i=0 ; i <data.length ; i++){
 box+=`
@@ -216,12 +239,13 @@ async function getArea(){
 let httpReq= await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`)
 let res= await httpReq.json()
 displayAreaFunc(res.meals)   
-
+close()
 }
 
 
 
 function displayFoodAboutA_I(dataMeal){
+  
 let boxMeal=``
 if(dataMeal !== null)
 for(let i =0 ; i<dataMeal.length ; i++){
@@ -250,6 +274,8 @@ let httpReq= await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=$
 let response= await httpReq.json()
 // console.log(response.meals)
 displayFoodAboutA_I(response.meals)
+close()
+
 }
 
 
@@ -261,11 +287,14 @@ async function getIngredients() {
   let http = await fetch(`https:www.themealdb.com/api/json/v1/1/list.php?i=list  `)
   let res = await http.json()  
   displayIngredients(res.meals.slice(0,20))
+  close()
+
 }
 
 
 function displayIngredients(data) { 
   searchContent.innerHTML=''
+contactData.innerHTML=''
 let ingeBox=''
 for(let i=0 ; i <data.length;i++){
   ingeBox+=`
@@ -297,3 +326,5 @@ displayFoodAboutA_I(response.meals)
 
 
  
+
+
