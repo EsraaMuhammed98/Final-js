@@ -2,12 +2,15 @@
 let foodCard=document.getElementById('foodCard')
 let loader = document.getElementById('loading')
 
-window.addEventListener('load',()=>{
-  loader.classList.add('d-none')
-  loader.addEventListener('transitionend',()=>{
-    loader.classList.remove('d-none')
-  })
-})
+function loading() {
+  // window.addEventListener('load',()=>{
+  //   loader.classList.add('d-none')
+  //   loader.addEventListener('transitionend',()=>{
+  //     loader.classList.remove('d-none')
+  //   })
+  // })
+    // $('#loading i').fadeOut(400)  
+}
 
 $('#bars').on('click' , function(){
     $('.menu').css({width:'250px'} , 200)
@@ -66,12 +69,14 @@ let http = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${s
 http =await http.json()
 displayFoodAboutA_I(http.meals)
 close()
+$('#loading i').fadeOut(400)  
 return http.meals
 }
 
 async function getsearchByFirstLetter(letter){
 let http = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`)
 http =await http.json()
+$('#loading i').fadeIn(400)
 displayFoodAboutA_I(http.meals)
 }
 
@@ -83,7 +88,7 @@ start()
 // Cateegory        
         function displayFood(data){
           contactData.innerHTML=''
-        searchContent.innerHTML=''
+                searchContent.innerHTML=''
           let box=''
           for(let i =0 ; i<data.length ; i++){
               box+=`
@@ -113,7 +118,7 @@ close()
 }
 
 function displayCatMeals(dataMeal){
-searchContent.innerHTML=''
+        searchContent.innerHTML=''
 contactData.innerHTML=''
 let boxMeal=''
 for(let i =0 ; i<dataMeal.length ; i++){
@@ -155,7 +160,7 @@ async function getDetails (id){
 }
 
 function displayDetails(data) {
-  searchContent.innerHTML=''
+          searchContent.innerHTML=''
 contactData.innerHTML=''
 
   let recipes = ``
@@ -210,7 +215,7 @@ contactData.innerHTML=''
 //Area
  
 function displayAreaFunc(data){
-searchContent.innerHTML=''
+        searchContent.innerHTML=''
 contactData.innerHTML=''
 let box=''
 for(let i=0 ; i <data.length ; i++){
@@ -283,7 +288,7 @@ close()
 async function getIngredients() {
   foodCard.innerHTML=''
   // contactData.innerHTML=''
-  let http = await fetch(`https:www.themealdb.com/api/json/v1/1/list.php?i=list  `)
+  let http = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list  `)
   let res = await http.json()  
   displayIngredients(res.meals.slice(0,20))
   close()
@@ -292,7 +297,7 @@ async function getIngredients() {
 
 
 function displayIngredients(data) { 
-  searchContent.innerHTML=''
+   searchContent.innerHTML=''
 contactData.innerHTML=''
 let ingeBox=''
 for(let i=0 ; i <data.length;i++){
