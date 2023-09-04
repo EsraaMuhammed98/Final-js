@@ -292,7 +292,6 @@ async function getIngredients() {
   let res = await http.json()  
   displayIngredients(res.meals.slice(0,20))
   close()
-
 }
 
 
